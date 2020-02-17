@@ -1,0 +1,64 @@
+.tabs {
+  list-style: none;
+  display: flex;
+  margin-bottom: 3px;
+}
+
+.tabs__item {
+  width: 12rem;
+  margin-right: .3rem;
+  padding: 1.5rem 1rem;
+  border-top: 1px solid var(--color-grey-light-3);
+  border-right: 1px solid var(--color-grey-light-3);
+  border-left: 1px solid var(--color-grey-light-3);
+  border-radius: 3px 3px 0 0;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.6rem;
+  color: var(--color-grey-dark-2);
+  font-weight: 700;
+}
+
+.tabs__item:hover, .active-tab {
+  border-top: 1px solid var(--color-secondary);
+  border-right: 1px solid var(--color-secondary);
+  border-left: 1px solid var(--color-secondary);
+  color: var(--color-white);
+  background-color: var(--color-secondary);
+}
+
+.tabs__content {
+  box-shadow: 0px 1px 2px var(--color-grey-dark-2);
+  min-height: 38rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn__set-schedule {
+  margin-top: 5rem;
+  align-self: center;
+}
+
+.btn__get-bookings {
+  margin-left: 1rem;
+}
+
+.bookings__container {
+  display: none
+}
+
+.form-search-bookings {
+  width: 40%;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.form-search-bookings > input {
+  padding: 1rem 1.2rem;
+}
+
+.table__bookings-container {
+  display: none;
+}

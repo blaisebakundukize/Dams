@@ -1,0 +1,42 @@
+.register {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.register__title {
+  text-align: center;
+  height: 4rem;
+  background-color: var(--color-primary);
+  line-height: 4rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.register__patient {
+  margin-right: 3rem;
+}
+
+.register__doctor {
+  margin-left: 3rem;
+}
+
+.register__container {
+  width: 35rem;
+}
+
+.register--form {
+  /* height: 40rem; */
+  width: 85%;
+  margin: 2rem auto;
+}
+
+.register--form input {
+  margin-bottom: 0.6rem;
+}
+
+.btn__register {
+  margin: 0 auto;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Doctor Appointment - Login & Register</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/loginRegister.css" />
+</head>
+
+<body>
+    <div class="header">
+        <img src="./img/dams.png" alt="logo" class="logo">
+        <form action="#" class="form-login js--form-login" method="POST">
+            <input type="text" class="form__input form-login__input" placeholder="Username" name="username" required />
+            <input type="password" class="form__input form-login__input" placeholder="Password" name="password"
+                required />
+            <select name="userType" class="form__input form__select">
+                <option value="userType" selected>Select type</option>
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+                <option value="administrator">Administrator</option>
+            </select>
+            <input type="submit" value="Login" class="btn btn--red js--btn-login" />
+        </form>
+    </div>
+    <div class="container vertical-middle">
+        <div class="registers-container">
+            <h1 class="heading-primary">
+                Sign Up
+            </h1>
+            <div class="register">
+                <div class="register__patient register__container border">
+                    <div class="register__title">Patient</div>
+                    <form action="" class="register--form js--form-reg-patient">
+                        <div class="form--group">
+                            <input type="text" class="form__input" placeholder="Names" name="names" required />
+                            <span class='form__input--error js--error__pat-names'>Names should be at least 3
+                                characters</span>
+                        </div>
+                        <div class="form--group">
+                            <input type="email" class="form__input" placeholder="Email" name="email" required />
+                            <span class='form__input--error  js--error__pat-email'>Email should be formatted e.g
+                                "myemail@gmail.com"</span>
+                        </div>
+
+                        <div class="form--group">
+                            <input type="number" max=799999999 class="form__input" placeholder="Phone Number"
+                                name="phone" required />
+                            <span class='form__input--error  js--error__pat-phone'>Phone number should be 9 digits
+                                starts from 7</span>
+                        </div>
+                        <div class="form--group">
+                            <input type="text" class="form__input" placeholder="Username" name="username" required />
+                            <span class='form__input--error  js--error__pat-username'>Username should be at
+                                least 3 characters</span>
+                        </div>
+                        <div class="form--group">
+                            <input type="password" class="form__input" placeholder="Password" name="password"
+                                required />
+                            <span class='form__input--error  js--error__pat-password'>Password should be at
+                                least 3 characters</span>
+                        </div>
+                        <input type="submit" value="Register" class="btn btn--red js--btn-reg-patient" />
+                    </form>
+                    <div class="error-message"></div>
+                </div>
+                <div class="register__doctor register__container border">
+                    <div class="register__title">Doctor</div>
+                    <form action="" class="register--form js--form-reg-doctor">
+                        <div class="form--group">
+                            <input type="text" class="form__input" placeholder="Names" name="names" required />
+                            <span class='form__input--error  js--error__doc-names'>Names should be at least
+                                3 characters</span>
+                        </div>
+                        <div class="form--group">
+                            <input type="email" class="form__input" placeholder="Email" name="email" required />
+                            <span class='form__input--error  js--error__doc-email'>Email should be formatted e.g
+                                "myemail@gmail.com"</span>
+                        </div>
+                        <div class="form--group">
+                            <input type="number" max=799999999 class="form__input" placeholder="Phone Number"
+                                name="phone" required />
+                            <span class='form__input--error  js--error__doc-phone'>Phone number should be 9 digits
+                                starts from 7</span>
+                        </div>
+                        <div class="form--group">
+                            <input type="text" class="form__input" placeholder="Username" name="username" required />
+                            <span class='form__input--error  js--error__doc-username'>Username should be at
+                                least 3 characters </span>
+                        </div>
+                        <div class="form--group">
+                            <input type="password" class="form__input" placeholder="Password" name="password"
+                                required />
+                            <span class='form__input--error  js--error__doc-password'>Password should be at
+                                least 3 characters</span>
+                        </div>
+                        <div class="form--group">
+                            <input type="text" class="form__input" placeholder="Department" name="department"
+                                required />
+                            <span class='form__input--error js--error__doc-department'>Department should be
+                                at least 3 characters</span>
+                        </div>
+                        <input type="submit" value="Register" class="btn btn--red btn__register js--btn-reg-doctor" />
+                    </form>
+                    <div class="error-message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="line"></div>
+        <p class="text--small text--grey center-text">&copy Doctor Appointment Management System </p>
+    </footer>
+    <script type="module" src="./js/validateInput.js"></script>
+    <script type="module" src="./js/login.js"></script>
+    <script type="module" src="./js/register.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Doctor Appointment - Login & Register</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/doctor.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/table.css" />
+</head>
+
+<body>
+  <div class="header">
+    <img src="../img/dams.png" alt="logo" class="logo">
+    <div class="user-details">
+      <p class="text js--doctor-name"></p>
+      <button class="btn btn--red js--bt-logout">Logout</button>
+    </div>
+  </div>
+  <div class="container horizontal-middle">
+    <div class="section">
+      <p class="section__info">
+        Welcome to Doctor Appointment Management System here you will be able to set a schedule of
+        your
+        availability and view bookings
+      </p>
+      <div class="section__content">
+        <ul class="tabs">
+          <li class="tabs__item active-tab js--tab-schedules" onclick="tabHandler(event, 'schedules')">Set schedules
+          </li>
+          <li class="tabs__item js--tab-bookings" onclick="tabHandler(event, 'bookings')">Bookings</li>
+        </ul>
+        <div class="tabs__content">
+          <form action="" id="schedules" class="form--set-schedule tab__content js--form-set-schedule">
+            <div class="display--flex">
+              <div class="form--group">
+                <label for="schedule" class="form__label">Date:</label>
+                <input type="date" class="form__input" name='schedule' required />
+              </div>
+              <div class="form--group">
+                <label for="timeFrom" class="form__label">Start at:</label>
+                <input type="time" class="form__input" name='timeFrom' required />
+              </div>
+              <div class="form--group">
+                <label for="timeFrom" class="form__label">End at:</label>
+                <input type="time" class="form__input" name='timeEnd' required />
+              </div>
+              <div class="form--group">
+                <label for="bookings" class="form__label">Number of Patients:</label>
+                <input type="number" class="form__input" name='bookings' required placeholder="Bookings" disabled>
+              </div>
+            </div>
+            <input type="submit" value='Set' class="btn btn--red-2 btn__set-schedule js--btn-schedule" />
+          </form>
+          <div id="bookings" class="bookings__container tab__content width__90 js--bookings">
+            <form action="" class="form-search-bookings display--flex js--form-get-scheduled">
+              <input type="date" class="form__input form__input-date-bookings" name='scheduled' required />
+              <input type="submit" value='Patients' class="btn btn--red-2 btn__get-bookings js--btn-get-bookings" />
+            </form>
+            <div class="table__bookings-container">
+              <div class="tab__item--container">
+                <div class="table__container">
+                  <table class="doctors-schedules js--table-bookings">
+                    <thead class="table__fixed-header">
+                      <tr>
+                        <th class="col-number">No
+                          <div class="fixed-header">No</div>
+                        </th>
+                        <th class="col-name">Patient
+                          <div class="fixed-header">Patient</div>
+                        </th>
+                        <th class="col-department">Department
+                          <div class="fixed-header">Department</div>
+                        </th>
+                        <th class="col-appointment">Date
+                          <div class="fixed-header">Date</div>
+                        </th>
+                        <th class="col-appointment">Appointment Time
+                          <div class="fixed-header">Appointment Time</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="table__bookings-body">
+                    </tbody>
+                  </table>
+                  <p class="text text--red center-text table__error-message js--bookings-error-message"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="line"></div>
+    <p class="text--small text--grey center-text">&copy Doctor Appointment Management System </p>
+  </footer>
+  <script type="module" src="../js/doctor.js"></script>
+  <script type="module" src="../js/logout.js"></script>
+</body>
+
+</html>

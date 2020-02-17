@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Doctor Appointment - Login & Register</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/doctor.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/table.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/modal.css" />
+</head>
+
+<body>
+  <div class="header">
+    <img src="../img/dams.png" alt="logo" class="logo">
+    <div class="user-details">
+      <p class="text js--patient-name"></p>
+      <button class="btn btn--red js--bt-logout">Logout</button>
+    </div>
+  </div>
+  <div class="container horizontal-middle">
+    <div class="section">
+      <p class="section__info">
+        Welcome to Doctor Appointment Management System here you will get all information on
+        available Doctors in our System and able to take an appointment
+      </p>
+      <div class="section__content">
+        <ul class="tabs">
+          <li id="id-schedules" class="tabs__item active-tab js--tab-schedules"
+            onclick="tabHandler(event, 'schedules')">Book
+          </li>
+          <li id="id-appointments" class="tabs__item js--tab-bookings" onclick="tabHandler(event, 'bookings')">
+            Appointments</li>
+        </ul>
+        <div class="tabs__content">
+          <div id="schedules" class="tab__content width__90 js--schedules-container">
+            <h1 class="heading-primary text--grey">
+              Schedules
+            </h1>
+            <div class="table__actions-container">
+              <input type="text" id="search-schedule" class="form__input form__input--search-table"
+                onkeyup="searchSchedules()" placeholder="Search for doc or dep..." title="Type in a doc or dep">
+            </div>
+            <div class="tab__item--container">
+              <div class="table__container">
+                <table class="doctors-schedules js--docs-schedules">
+                  <thead class="table__fixed-header">
+                    <tr>
+                      <th class="col-number">No
+                        <div class="fixed-header">No</div>
+                      </th>
+                      <th class="col-name">Doctor
+                        <div class="fixed-header">Doctor</div>
+                      </th>
+                      <th class="col-department">Department
+                        <div class="fixed-header">Department</div>
+                      </th>
+                      <th class="col-appointment">Date
+                        <div class="fixed-header">Date</div>
+                      </th>
+                      <th class="col-appointment">Next Appointment
+                        <div class="fixed-header">Next Appointment</div>
+                      </th>
+                      <th class="col-actions">Actions
+                        <div class="fixed-header">Actions</div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="table__schedules-body">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="bookings" class="bookings__container tab__content width__90  js--bookings">
+            <h1 class="heading-primary text--grey">
+              Appointments
+            </h1>
+            <div class="tab__item--container">
+              <div class="table__container js--appointments-container">
+                <table class="doctors-schedules js--table-appointments">
+                  <thead class="table__fixed-header">
+                    <tr>
+                      <th class="col-number">No
+                        <div class="fixed-header">No</div>
+                      </th>
+                      <th class="col-name">Doctor
+                        <div class="fixed-header">Doctor</div>
+                      </th>
+                      <th class="col-department">Department
+                        <div class="fixed-header">Department</div>
+                      </th>
+                      <th class="col-appointment">Date
+                        <div class="fixed-header">Date</div>
+                      </th>
+                      <th class="col-appointment">Appointment Time
+                        <div class="fixed-header">Appointment Time</div>
+                      </th>
+                      <th class="col-actions">Status
+                        <div class="fixed-header">Status</div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="table__appointments-body">
+                  </tbody>
+                </table>
+                <p class="text text--red center-text table__error-message js--appointments-error-message"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal js--modal">
+    o <div class="modal--container">
+      <div class="modal--header">
+        <span class="close" onclick="closeModal()">&times;</span>
+      </div>
+      <div class="modal--body js--modal-body">
+        <h3 id="title-selected-appointment" class="heading-tertiary text--grey">
+          Are you sure you want this appointment?
+        </h3>
+      </div>
+      <div class="modal--footer js--modal-footer">
+        <!-- <button class="btn btn--cancel modal--footer__btn">Cancel</button>
+        <button class="btn btn--green modal--footer__btn">Book</button> -->
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="line"></div>
+    <p class="text--small text--grey center-text">&copy Doctor Appointment Management System </p>
+  </footer>
+  <script type="module" src="../js/patient.js"></script>
+  <script type="module" src="../js/logout.js"></script>
+</body>
+
+</html>
