@@ -1,13 +1,16 @@
-import { sendOrGetData, getUserData, checkUserType } from './sendData.js'
+import { sendOrGetData, getUserData, checkUserType } from "./sendData.js";
 
 const tableSchedules = document.querySelector(".js--docs-schedules");
 const tbodySchedules = document.querySelector(".table__schedules-body");
 const tableAppointments = document.querySelector(".js--table-appointments");
 const tbodyAppointments = document.querySelector(".table__appointments-body");
-const AppointmentsErrorMessage = document.querySelector(".js--appointments-error-message");
+const AppointmentsErrorMessage = document.querySelector(
+  ".js--appointments-error-message"
+);
 const modal = document.querySelector(".js--modal");
 const modalBody = document.querySelector(".js--modal-body");
 const modalFooter = document.querySelector(".js--modal-footer");
+const modalTitle = document.querySelector(".js--modal-title");
 const patientNameP = document.querySelector(".js--patient-name");
 
 // get user data
@@ -18,7 +21,8 @@ displayPatientName();
 // show patient name
 async function displayPatientName() {
   const patient = await userData;
-  patientNameP.innerHTML = "<span class='user-title'>Patient:</span> " + patient.name;
+  patientNameP.innerHTML =
+    "<span class='user-title'>Patient:</span> " + patient.name;
 }
 
 window.tabHandler = function tabHandler(event, tabName) {
@@ -39,7 +43,7 @@ window.tabHandler = function tabHandler(event, tabName) {
   if (event.target.attributes.id.value === "id-appointments") {
     generateAppointmentsTable();
   }
-}
+};
 
 // remove rows from table body
 function removeTableRows(table) {
@@ -58,11 +62,11 @@ function generateSchedulesTable() {
     for (let element of data) {
       number += 1;
       let row = tbodySchedules.insertRow();
-      row.setAttribute('id', element['schedule_id']);
+      row.setAttribute("id", element["schedule_id"]);
       let cellNumber = row.insertCell();
       cellNumber.innerHTML = number;
       for (let key in element) {
-        if (key != 'schedule_id') {
+        if (key != "schedule_id") {
           let cell = row.insertCell();
           cell.innerHTML = element[key];
         }
@@ -70,11 +74,11 @@ function generateSchedulesTable() {
         // cell.appendChild(cellText);
       }
       let cellActions = row.insertCell();
-      let button = document.createElement('input');
-      button.setAttribute('type', 'button');
-      button.setAttribute('value', 'book');
-      button.setAttribute('class', 'btn btn--green btn--action js--btn-book');
-      button.setAttribute('onclick', 'btnBookClickHandler(event)');
+      let button = document.createElement("input");
+      button.setAttribute("type", "button");
+      button.setAttribute("value", "book");
+      button.setAttribute("class", "btn btn--green btn--action js--btn-book");
+      button.setAttribute("onclick", "btnBookClickHandler(event)");
       cellActions.appendChild(button);
     }
   });
@@ -92,66 +96,91 @@ window.searchSchedules = function searchSchedules() {
     if (tdDoc && tdDep) {
       txtValueDoc = tdDoc.textContent || tdDoc.innerText;
       txtValueDep = tdDep.textContent || tdDep.innerText;
-      if ((txtValueDoc.toUpperCase().indexOf(filter) > -1) ||
-        (txtValueDep.toUpperCase().indexOf(filter) > -1)) {
+      if (
+        txtValueDoc.toUpperCase().indexOf(filter) > -1 ||
+        txtValueDep.toUpperCase().indexOf(filter) > -1
+      ) {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
       }
     }
   }
-}
-
+};
 
 // generate table for appointments
 async function generateAppointmentsTable() {
-  const patient = {}
+  const patient = {};
   const user = await userData;
   patient.patientId = user.user_id;
   const json = JSON.stringify(patient);
-  sendOrGetData("../controllers/bookedAppointments.php", json, "POST").then(data => {
-    if (data[0].success === false) {
-      tableAppointments.style.display = "none";
-      AppointmentsErrorMessage.innerHTML = data[0].message;
-      AppointmentsErrorMessage.style.display = "block";
-    } else {
-      AppointmentsErrorMessage.style.display = "none";
-      removeTableRows(tableAppointments);
-      if (tableAppointments.style.display == "none") {
-        tableAppointments.style.display = "block";
-      }
-      let number = 0;
-      for (let element of data) {
-        number += 1;
-        let row = tbodyAppointments.insertRow();
-        row.setAttribute('id', number)
-        let cellNumber = row.insertCell()
-        cellNumber.innerHTML = number;
-        for (let key in element) {
-          let cell = row.insertCell();
-          cell.innerHTML = element[key];
+  sendOrGetData("../controllers/bookedAppointments.php", json, "POST").then(
+    data => {
+      if (data[0].success === false) {
+        tableAppointments.style.display = "none";
+        AppointmentsErrorMessage.innerHTML = data[0].message;
+        AppointmentsErrorMessage.style.display = "block";
+      } else {
+        AppointmentsErrorMessage.style.display = "none";
+        removeTableRows(tableAppointments);
+        if (tableAppointments.style.display == "none") {
+          tableAppointments.style.display = "block";
         }
-        let cellStatus = row.insertCell();
-        let appointmentDate = element['date'] + " " + element['next'];
-        if (new Date() > new Date(appointmentDate)) {
-          cellStatus.setAttribute('class', 'text--red');
-          cellStatus.innerHTML = "outdated";
-        } else {
-          cellStatus.innerHTML = "pending";
-          cellStatus.setAttribute('class', 'text--green');
+        let number = 0;
+        for (let element of data) {
+          number += 1;
+          let row = tbodyAppointments.insertRow();
+          row.setAttribute("id", element["appointment_id"]);
+          let cellNumber = row.insertCell();
+          cellNumber.innerHTML = number;
+          for (let key in element) {
+            if (key !== "appointment_id") {
+              let cell = row.insertCell();
+              cell.innerHTML = element[key];
+            }
+          }
+          let cellStatus = row.insertCell();
+          let appointmentDate = element["date"] + " " + element["next"];
+          if (new Date() > new Date(appointmentDate)) {
+            cellStatus.setAttribute("class", "text--red");
+            cellStatus.innerHTML = "outdated";
+          } else {
+            let containerElt = document.createElement("div");
+            containerElt.setAttribute("class", "table_action-status-container");
+            let statusElt = document.createElement("span");
+            statusElt.innerHTML = "pending";
+            statusElt.setAttribute("class", "text--green");
+
+            let btnCancel = document.createElement("input");
+            btnCancel.setAttribute("type", "button");
+            btnCancel.setAttribute("value", "Cancel");
+            btnCancel.setAttribute(
+              "class",
+              "btn btn--green btn--action btn--cancel js--btn-cancel-appointment"
+            );
+            btnCancel.setAttribute("onclick", "btnCancelAppointment(event)");
+
+            // containerElt.innerHTML = btnCancel;
+            containerElt.appendChild(statusElt);
+            containerElt.appendChild(btnCancel);
+
+            // let cell = bodyRow.insertCell();
+            cellStatus.appendChild(containerElt);
+            // cellStatus.innerHTML = "pending";
+            // cellStatus.setAttribute("class", "text--green");
+          }
         }
       }
     }
-  });
+  );
 }
 
 // table for selected appointment
-function generateTableForSelectedAppointment() {
-  const cells = event.target.parentNode.parentNode.cells;
+function generateTableForSelectedAppointment(cells) {
   let tableSelectedAppointment = document.createElement("table");
-  tableSelectedAppointment.setAttribute('class', 'table__selected-appointment');
-  const headRow = document.createElement('tr');
-  const ths = ['Doctor', 'Department', 'Date', 'Appointment'];
+  tableSelectedAppointment.setAttribute("class", "table__selected-appointment");
+  const headRow = document.createElement("tr");
+  const ths = ["Doctor", "Department", "Date", "Appointment"];
   ths.forEach(thValue => {
     const th = document.createElement("th");
     th.innerHTML = thValue;
@@ -159,7 +188,7 @@ function generateTableForSelectedAppointment() {
   });
   tableSelectedAppointment.appendChild(headRow);
   const numberOfCells = 4;
-  const bodyRow = document.createElement('tr');
+  const bodyRow = document.createElement("tr");
   for (let i = 1; i <= numberOfCells; i++) {
     let cell = bodyRow.insertCell();
     cell.innerHTML = cells[i].outerText;
@@ -177,25 +206,88 @@ function removeElementFromModal() {
   });
 }
 
+// Id for appointment to cancel
+let appointmentId;
+
+// action button handler for canceling an appointment
+window.btnCancelAppointment = function btnCancelAppointment(event) {
+  removeElementFromModal();
+  // appointment id set as an id of a tr
+  appointmentId = event.target.parentNode.parentNode.parentNode.id;
+  const cells = event.target.parentNode.parentNode.parentNode.cells;
+  modalTitle.innerHTML = "Are you sure you want to cancel this appointment?";
+  const table = generateTableForSelectedAppointment(cells);
+  modalBody.appendChild(table);
+  const btnCancel =
+    '<button class="btn btn--cancel modal--footer__btn" onclick="closeModal()">No</button>';
+  const btnBook =
+    '<button class="btn btn--green modal--footer__btn" onClick="cancelAppointment(event)">Yes</button>';
+  modalFooter.innerHTML = btnCancel + btnBook;
+  modal.style.display = "block";
+  event.preventDefault();
+};
+
+window.cancelAppointment = async function cancelAppointment(event) {
+  console.log(appointmentId);
+  const patient = await userData;
+  const appointment = {};
+  appointment.patientId = patient.user_id;
+  appointment.appointmentId = appointmentId;
+  const json = JSON.stringify(appointment);
+  sendOrGetData("../controllers/cancelAppointment.php", json, "POST").then(
+    result => {
+      displayMsgForCancelAppointment(result);
+      // await closeModal();
+      // console.log("result");
+      // event.preventDefault();
+      // return alert(result[0].message);
+    }
+  );
+};
+
+// This cause appointment table to reload on modal get closed
+let isModalClosedOnAppointCancelSuccess = false;
+
+function displayMsgForCancelAppointment(result) {
+  closeModal();
+  modalTitle.innerHTML = result[0].message;
+  isModalClosedOnAppointCancelSuccess = result[0].success;
+  const btnOk =
+    '<button class="btn btn--green modal--footer__btn" onClick="closeModelOnCancelAppointmentSuccess()">Ok</button>';
+  modalFooter.innerHTML = btnOk;
+  modal.style.display = "block";
+}
+
+window.closeModelOnCancelAppointmentSuccess = () => {
+  modal.style.display = "none";
+  if (isModalClosedOnAppointCancelSuccess) {
+    generateAppointmentsTable();
+  }
+};
+
 // id of selected schedule
 let scheduleId;
 
-// action button handler in the table of schedules 
+// action button handler in the table of schedules
 window.btnBookClickHandler = function btnBookClickHandler(event) {
   // remove element inside modal body
   removeElementFromModal();
 
-  // appointment id set as an id of a tr 
+  // appointment id set as an id of a tr
   scheduleId = event.target.parentNode.parentNode.id;
-  const table = generateTableForSelectedAppointment()
+  const cells = event.target.parentNode.parentNode.cells;
+
+  const table = generateTableForSelectedAppointment(cells);
   modalBody.appendChild(table);
-  const btnCancel = '<button class="btn btn--cancel modal--footer__btn" onclick="closeModal()">Cancel</button>';
-  const btnBook = '<button class="btn btn--green modal--footer__btn" onClick="bookAppointment(event)">Book</button>';
+  const btnCancel =
+    '<button class="btn btn--cancel modal--footer__btn" onclick="closeModal()">Cancel</button>';
+  const btnBook =
+    '<button class="btn btn--green modal--footer__btn" onClick="bookAppointment(event)">Book</button>';
   modalFooter.innerHTML = btnCancel + btnBook;
   modal.style.display = "block";
   // console.log(appointmentId);
   event.preventDefault();
-}
+};
 
 window.bookAppointment = async function bookAppointment(event) {
   const patient = await userData;
@@ -203,20 +295,22 @@ window.bookAppointment = async function bookAppointment(event) {
   appointment.patientId = patient.user_id;
   appointment.scheduleId = scheduleId;
   const json = JSON.stringify(appointment);
-  sendOrGetData("../controllers/bookAppointment.php", json, "POST").then(result => {
-    closeModal();
-    event.preventDefault();
-    return alert(result[0].message);
-  });
-}
+  sendOrGetData("../controllers/bookAppointment.php", json, "POST").then(
+    result => {
+      closeModal();
+      event.preventDefault();
+      return alert(result[0].message);
+    }
+  );
+};
 
 window.closeModal = function closeModal() {
   modal.style.display = "none";
   // remove element inside modal body
   removeElementFromModal();
-}
+  if (isModalClosedOnAppointCancelSuccess) generateAppointmentsTable();
+};
 
-window.onclick = function (event) {
+window.onclick = function(event) {
   if (event.target == modal) closeModal();
-}
-
+};

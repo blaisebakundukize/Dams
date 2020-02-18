@@ -23,7 +23,8 @@ td + td {
   border-left: 1px solid var(--color-grey-light-2);
 }
 
-td, th {
+td,
+th {
   border-bottom: 1px solid var(--color-grey-light-1);
   padding: 1rem;
 }
@@ -77,6 +78,12 @@ thead tr th:first-child div {
   margin-bottom: 1rem;
   display: flex;
   justify-content: flex-end;
+}
+
+.table_action-status-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .table__selected-appointment tr th {
