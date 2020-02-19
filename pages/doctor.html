@@ -32,6 +32,7 @@
           <li class="tabs__item active-tab js--tab-schedules" onclick="tabHandler(event, 'schedules')">Set schedules
           </li>
           <li class="tabs__item js--tab-bookings" onclick="tabHandler(event, 'bookings')">Bookings</li>
+          <li class="tabs__item js--tab-report" onclick="tabHandler(event, 'report')">Report</li>
         </ul>
         <div class="tabs__content">
           <form action="" id="schedules" class="form--set-schedule tab__content js--form-set-schedule">
@@ -81,12 +82,68 @@
                         <th class="col-appointment">Appointment Time
                           <div class="fixed-header">Appointment Time</div>
                         </th>
+                        <th class="col-">Consulted
+                          <div class="fixed-header">Consulted</div>
+                        </th>
                       </tr>
                     </thead>
                     <tbody class="table__bookings-body">
                     </tbody>
                   </table>
                   <p class="text text--red center-text table__error-message js--bookings-error-message"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Report -->
+
+          <div id="report" class="bookings__container tab__content width__90 js--bookings">
+            <form action="" class="form-search-report display--flex js--form-get-report">
+              <div class="form-group-row">
+                <label for="schedule" class="form__label">From:</label>
+                <input type="date" class="form__input form__input-date-from" name='dateFrom' required />
+              </div>
+              <div class="form-group-row">
+                <label for="schedule" class="form__label">To:</label>
+                <input type="date" class="form__input form__input-date-to" name='dateTo' required />
+              </div>
+              <div class="form-group-row">
+                <label for="schedule" class="form__label"></label>
+                <input type="submit" value='Generate Report'
+                  class="btn btn--red-2 btn__get-report js--btn-generate-report" />
+              </div>
+            </form>
+            <div class="table__report-container">
+              <div class="tab__item--container">
+                <div class="table__container">
+                  <table class="doctors-schedules js--table-report">
+                    <thead class="table__fixed-header">
+                      <tr>
+                        <th class="col-number">No
+                          <div class="fixed-header">No</div>
+                        </th>
+                        <th class="col-name">Patient
+                          <div class="fixed-header">Patient</div>
+                        </th>
+                        <th class="col-department">Department
+                          <div class="fixed-header">Department</div>
+                        </th>
+                        <th class="col-appointment">Date
+                          <div class="fixed-header">Date</div>
+                        </th>
+                        <th class="col-appointment">Appointment Time
+                          <div class="fixed-header">Appointment Time</div>
+                        </th>
+                        <th class="col-">Consulted
+                          <div class="fixed-header">Consulted</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="table__report-body">
+                    </tbody>
+                  </table>
+                  <p class="text text--red center-text table__error-message js--report-error-message"></p>
                 </div>
               </div>
             </div>

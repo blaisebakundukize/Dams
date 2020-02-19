@@ -287,6 +287,11 @@ body {
   margin-bottom: 0.7rem;
 }
 
+.form-group-row {
+  display: flex;
+  align-items: center;
+}
+
 .form__label {
   font-size: 1.6rem;
   margin-bottom: 1rem;

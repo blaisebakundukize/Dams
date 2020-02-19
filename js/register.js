@@ -50,14 +50,6 @@ function registerDoctorHandler(e) {
   dataForDoc.password = password;
   dataForDoc.department = department;
 
-  // Validate Email
-  if (validateInput("email", email)) {
-    console.log(email);
-    return alert(
-      "Your email address is invalid. Please enter a valid address."
-    );
-  }
-
   const json = JSON.stringify(dataForDoc);
   sendOrGetData("./controllers/register.php", json, "POST").then(result => {
     return alert(result[0].message);

@@ -6,7 +6,7 @@
 
 .tabs__item {
   width: 12rem;
-  margin-right: .3rem;
+  margin-right: 0.3rem;
   padding: 1.5rem 1rem;
   border-top: 1px solid var(--color-grey-light-3);
   border-right: 1px solid var(--color-grey-light-3);
@@ -19,7 +19,8 @@
   font-weight: 700;
 }
 
-.tabs__item:hover, .active-tab {
+.tabs__item:hover,
+.active-tab {
   border-top: 1px solid var(--color-secondary);
   border-right: 1px solid var(--color-secondary);
   border-left: 1px solid var(--color-secondary);
@@ -46,19 +47,53 @@
 }
 
 .bookings__container {
-  display: none
+  display: none;
+}
+
+.form-search-bookings,
+.form-search-report {
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
 }
 
 .form-search-bookings {
   width: 40%;
-  margin: 0 auto;
-  margin-bottom: 1.5rem;
+}
+
+.form-search-report {
+  width: 90%;
 }
 
 .form-search-bookings > input {
   padding: 1rem 1.2rem;
 }
 
-.table__bookings-container {
+.form__input-date-from,
+.form__input-date-to {
+  padding: 0.7rem 1rem;
+  margin-left: 0.5rem;
+}
+
+.btn__get-report {
+  padding: 1rem 1rem;
+}
+
+.form__input-date-from {
+  margin-right: 1rem;
+}
+
+.table__bookings-container,
+.table__report-container {
   display: none;
+}
+
+.checkbox {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 1rem;
+  margin-left: 2rem;
 }

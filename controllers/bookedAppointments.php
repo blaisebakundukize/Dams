@@ -58,7 +58,7 @@ class BookedAppointments
 
     // get booked appointments for a doctor
     public function getDoctorAppointments($con){
-      $query_get_appointments = "SELECT P.name, D.department, S.schedule_date, A.appointment_time FROM patient P INNER JOIN appointments A on P.patient_id = A.patient_id INNER JOIN schedules S on S.schedule_id = A.schedule_id INNER JOIN doctors D on D.doctor_id = S.doctor_id WHERE S.schedule_date = '$this->schedule_date' AND D.doctor_id = $this->doctor_id";
+      $query_get_appointments = "SELECT P.name, D.department, S.schedule_date, A.appointment_time,A.is_consulted, A.appointment_id FROM patient P INNER JOIN appointments A on P.patient_id = A.patient_id INNER JOIN schedules S on S.schedule_id = A.schedule_id INNER JOIN doctors D on D.doctor_id = S.doctor_id WHERE S.schedule_date = '$this->schedule_date' AND D.doctor_id = $this->doctor_id";
 
       $result = mysqli_query($con, $query_get_appointments);
 
@@ -66,7 +66,7 @@ class BookedAppointments
       $rows = [];
       if(mysqli_num_rows($result) > 0){
         while($rw = mysqli_fetch_array($result)){
-          array_push($rows, array('name' => $rw['name'], 'department' => $rw['department'], 'scheduleDate' => $rw['schedule_date'], 'appointmentTime' => $rw['appointment_time']));
+          array_push($rows, array('name' => $rw['name'], 'department' => $rw['department'], 'scheduleDate' => $rw['schedule_date'], 'appointmentTime' => $rw['appointment_time'],'isConsulted' => $rw['is_consulted'],'appointmentId' => $rw['appointment_id']));
         }
         return $rows;
       }else{
